@@ -131,16 +131,16 @@ download-rpms target:
         pre_commands+="{{pre_commands}} ; "
     fi
     if [[ -n "{{copr_repos}}" ]]; then
-        pre_commands+="dnf install -y dnf5-plugins"
+        pre_commands+="dnf5 install -y dnf5-plugins"
         for r in "{{copr_repos}}"; do
-            pre_commands+=" ; dnf copr enable -y ${r}"
+            pre_commands+=" ; dnf5 copr enable -y ${r}"
         done
         pre_commands+=" ; "
     fi
     if [[ -n "{{external_repos}}" ]]; then
-        pre_commands+="dnf install -y dnf5-plugins"
+        pre_commands+="dnf5 install -y dnf5-plugins"
         for r in "{{external_repos}}"; do
-            pre_commands+=" ; dnf config-manager addrepo --from-repofile=${r}"
+            pre_commands+=" ; dnf5 config-manager addrepo --from-repofile=${r}"
         done
         pre_commands+=" ; "
     fi
@@ -151,14 +151,14 @@ download-rpms target:
     cd rpms
 
     echo "⬇️ Downloading packages ({{arch}}): ${packages}"
-    # dnf install --downloadonly --downloaddir . ${arch} ${enablerepos} ${packages}
+    # dnf5 install --downloadonly --downloaddir . ${arch} ${enablerepos} ${packages}
     podman run --rm -ti \
         --volume "${PWD}:/var/srv" \
         --volume "${PWD}/../../.dnf-cache:/var/cache/libdnf5" \
         --workdir "/var/srv" \
         --security-opt label=disable \
         "{{target}}" \
-        bash -c "${pre_commands}dnf download --resolve ${arch} ${dnf_opts} ${enablerepos} ${packages}"
+        bash -c "${pre_commands}dnf5 download --resolve ${arch} ${dnf_opts} ${enablerepos} ${packages}"
 
 # Manual download step, that can be overridden to dowload non RPM content
 download-manual:
@@ -315,7 +315,7 @@ reset-selinux-labels target:
         pre_commands+="{{pre_commands}} ; "
     fi
     if [[ -n "{{packages}}" ]]; then
-        pre_commands+="dnf install -y ${dnf_opts} ./rpms/* && "
+        pre_commands+="dnf5 install -y ${dnf_opts} ./rpms/* && "
     fi
 
     filecontexts="/etc/selinux/targeted/contexts/files/file_contexts"
