@@ -1,16 +1,17 @@
-name := "lact"
+dnf_arch := "i686 x86_64"
+name := "vk-hdr-layer"
 packages := "
-lact
+vk-hdr-layer.x86_64
+vk-hdr-layer.i686
 "
+copr_repos := "jackgreiner/vk-hdr-layer"
 base_images := "
 quay.io/fedora/fedora-coreos:next
 quay.io/fedora-ostree-desktops/kinoite:41
 ghcr.io/ublue-os/aurora-dx:stable
 ghcr.io/ublue-os/bazzite:stable
+ghcr.io/ublue-os/bazzite:41.20250216.2
 "
-copr_repos := "ilyaz/LACT"
-disable_repos := "'*'"
-enable_repos := "copr:copr.fedorainfracloud.org:ilyaz:LACT"
 
 import '../sysext.just'
 
