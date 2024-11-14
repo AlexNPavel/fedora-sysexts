@@ -1,0 +1,20 @@
+name := "local-packages"
+packages := "
+custom_rpms/*.rpm
+"
+base_images := "
+quay.io/fedora/fedora-coreos:next
+quay.io/fedora-ostree-desktops/kinoite:41
+ghcr.io/ublue-os/aurora-dx:stable
+"
+
+import '../sysext.just'
+
+download-manual:
+    #!/bin/bash
+    set -euo pipefail
+    # set -x
+    cp custom-rpms/*.rpm rpms
+	
+all: default
+
