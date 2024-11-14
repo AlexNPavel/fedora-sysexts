@@ -209,16 +209,16 @@ download-rpms target arch=arch:
         pre_commands+="{{pre_commands}} ; "
     fi
     if [[ -n "{{copr_repos}}" ]]; then
-        pre_commands+="dnf install -y dnf5-plugins"
+        pre_commands+="dnf5 install -y dnf5-plugins"
         for r in "{{copr_repos}}"; do
-            pre_commands+=" ; dnf copr enable -y ${r}"
+            pre_commands+=" ; dnf5 copr enable -y ${r}"
         done
         pre_commands+=" ; "
     fi
     if [[ -n "{{external_repos}}" ]]; then
-        pre_commands+="dnf install -y dnf5-plugins"
+        pre_commands+="dnf5 install -y dnf5-plugins"
         for r in "{{external_repos}}"; do
-            pre_commands+=" ; dnf config-manager addrepo --from-repofile=${r}"
+            pre_commands+=" ; dnf5 config-manager addrepo --from-repofile=${r}"
         done
         pre_commands+=" ; "
     fi
@@ -229,7 +229,7 @@ download-rpms target arch=arch:
     cd rpms
 
     echo "⬇️ Downloading packages (${dnf_arches}): ${packages}"
-    # dnf install --downloadonly --downloaddir . ${dnf_arch} ${enablerepos} ${packages}
+    # dnf5 install --downloadonly --downloaddir . ${dnf_arch} ${enablerepos} ${packages}
     podman run --rm -ti \
         --arch={{arch}} \
         --volume "${PWD}:/var/srv" \
@@ -237,7 +237,7 @@ download-rpms target arch=arch:
         --workdir "/var/srv" \
         --security-opt label=disable \
         "{{target}}" \
-        bash -c "${pre_commands}dnf download --resolve ${dnf_arch} ${dnf_opts} ${disablerepos} ${enablerepos} ${packages}"
+        bash -c "${pre_commands}dnf5 download --resolve ${dnf_arch} ${dnf_opts} ${disablerepos} ${enablerepos} ${packages}"
 
 # Manual download step, that can be overridden to dowload non RPM content
 download-manual arch=arch:
@@ -415,7 +415,7 @@ reset-selinux-labels target arch=arch:
     fi
 
     if [[ -n "{{packages}}" ]]; then
-        pre_commands+="dnf install -y ${dnf_opts} ${disablerepos} ./rpms/* && "
+        pre_commands+="dnf5 install -y ${dnf_opts} ${disablerepos} ./rpms/* && "
     fi
 
     filecontexts="/etc/selinux/targeted/contexts/files/file_contexts"

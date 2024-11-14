@@ -4,6 +4,8 @@ base_images := "
 quay.io/fedora/fedora-coreos:stable
 quay.io/fedora-ostree-desktops/silverblue:41
 quay.io/fedora-ostree-desktops/kinoite:41
+ghcr.io/ublue-os/ucore:stable
+ghcr.io/ublue-os/bazzite:stable
 "
 
 import '../sysext.just'
