@@ -1,13 +1,12 @@
-name := "btop"
+name := "vk-hdr-layer"
 packages := "
-btop
+vk-hdr-layer
 "
+copr_repos := "jackgreiner/vk-hdr-layer"
 base_images := "
-quay.io/fedora/fedora-coreos:stable x86_64,aarch64
-quay.io/fedora-ostree-desktops/silverblue:41
+quay.io/fedora/fedora-coreos:next
 quay.io/fedora-ostree-desktops/kinoite:41
 ghcr.io/ublue-os/aurora-dx:stable
-ghcr.io/ublue-os/ucore:stable
 ghcr.io/ublue-os/bazzite:stable
 "
 
