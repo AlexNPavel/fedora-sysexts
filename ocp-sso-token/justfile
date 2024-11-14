@@ -1,14 +1,12 @@
-name := "btop"
+name := "ocp-sso-token"
 packages := "
-btop
+ocp-sso-token
 "
+copr_repos := "@cki/ocp-sso-token"
 base_images := "
 quay.io/fedora/fedora-coreos:next
-quay.io/fedora-ostree-desktops/silverblue:41
 quay.io/fedora-ostree-desktops/kinoite:41
 ghcr.io/ublue-os/aurora-dx:stable
-ghcr.io/ublue-os/ucore:stable
-ghcr.io/ublue-os/bazzite:stable
 "
 
 import '../sysext.just'
