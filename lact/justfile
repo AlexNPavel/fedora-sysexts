@@ -1,0 +1,17 @@
+name := "lact"
+packages := "
+lact
+"
+base_images := "
+quay.io/fedora/fedora-coreos:next
+quay.io/fedora-ostree-desktops/kinoite:41
+ghcr.io/ublue-os/aurora-dx:stable
+ghcr.io/ublue-os/bazzite:stable
+"
+copr_repos := "ilyaz/LACT"
+disable_repos := "'*'"
+enable_repos := "copr:copr.fedorainfracloud.org:ilyaz:LACT"
+
+import '../sysext.just'
+
+all: default
