@@ -1,0 +1,12 @@
+name := "fish"
+packages := "
+fish
+"
+base_images := "
+quay.io/fedora/fedora-coreos:next
+ghcr.io/ublue-os/ucore:stable
+"
+
+import '../sysext.just'
+
+all: default
