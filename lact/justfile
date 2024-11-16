@@ -1,0 +1,25 @@
+name := "lact"
+packages := "
+lact.rpm
+"
+base_images := "
+quay.io/fedora/fedora-coreos:next
+quay.io/fedora-ostree-desktops/kinoite:41
+ghcr.io/ublue-os/aurora-dx:stable
+ghcr.io/ublue-os/bazzite:stable
+"
+
+import '../sysext.just'
+
+download-manual:
+    #!/bin/bash
+    set -euo pipefail
+    # set -x
+    echo 'Installing LACT...'
+    wget \
+      $(curl -s https://api.github.com/repos/ilya-zlobintsev/LACT/releases/latest | \
+      jq -r ".assets[] | select(.name | test(\"lact-[0-9].*fedora-41\")) | .browser_download_url") \
+      -O rpms/lact.rpm
+	
+all: default
+

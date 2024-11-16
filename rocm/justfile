@@ -1,0 +1,14 @@
+name := "rocm-smi"
+packages := "
+rocm-smi
+"
+base_images := "
+quay.io/fedora/fedora-coreos:next
+quay.io/fedora-ostree-desktops/kinoite:41
+ghcr.io/ublue-os/aurora-dx:stable
+ghcr.io/ublue-os/bazzite:stable
+"
+
+import '../sysext.just'
+
+all: default
